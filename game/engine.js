@@ -1,4 +1,4 @@
-const Deck = require('./deck');
+﻿const Deck = require('./deck');
 const Hand = require('./hand');
 const WinChecker = require('./win-checker');
 const FanCalculator = require('./fan-calculator');
@@ -18,18 +18,19 @@ const SEATS = ['east', 'south', 'west', 'north'];
 class GameEngine {
   constructor(roomId, players) {
     this.roomId = roomId;
-    this.players = players.map((p, i) => ({
-      ...p,
-      seat: SEATS[i],
-      seatIndex: i,
-      hand: new Hand(),
-      hasOpened: false,
-      mingGangCount: 0,
-      anGangCount: 0,
-      piZiGangCount: 0,
-      score: 0,
-      isZhuang: i === 0
-    }));
+    this.players = players;
+    for (let i = 0; i < players.length; i++) {
+      const p = players[i];
+      p.seat = SEATS[i];
+      p.seatIndex = i;
+      p.hand = new Hand();
+      p.hasOpened = false;
+      p.mingGangCount = 0;
+      p.anGangCount = 0;
+      p.piZiGangCount = 0;
+      p.score = 0;
+      p.isZhuang = i === 0;
+    }
     this.phase = PHASES.WAITING;
     this.deck = null;
     this.currentPlayerIndex = 0;
