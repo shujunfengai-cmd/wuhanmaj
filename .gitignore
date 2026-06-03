@@ -1,0 +1,4 @@
+node_modules/
+mahjong-data.json
+*.db
+.DS_Store

@@ -1,0 +1,116 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: #1a5f2a;
+  color: #fff;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+.screen { display: none; padding: 20px; max-width: 900px; margin: 0 auto; }
+.screen.active { display: block; }
+
+/* 首页 */
+#home-screen { text-align: center; padding-top: 60px; }
+#home-screen h1 { font-size: 2.5rem; margin-bottom: 40px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+.home-actions { display: flex; flex-direction: column; gap: 12px; max-width: 320px; margin: 0 auto; }
+.home-actions input {
+  padding: 12px 16px; border: none; border-radius: 8px; font-size: 1rem;
+  background: rgba(255,255,255,0.15); color: #fff; outline: none;
+}
+.home-actions input::placeholder { color: rgba(255,255,255,0.6); }
+.divider { color: rgba(255,255,255,0.5); margin: 8px 0; }
+.btn-primary, .btn-secondary {
+  padding: 14px 24px; border: none; border-radius: 8px; font-size: 1rem;
+  cursor: pointer; transition: transform 0.1s;
+}
+.btn-primary { background: #ff6b35; color: #fff; }
+.btn-secondary { background: rgba(255,255,255,0.2); color: #fff; }
+.btn-primary:hover, .btn-secondary:hover { transform: scale(1.02); }
+.btn-text { background: none; border: none; color: rgba(255,255,255,0.6); cursor: pointer; margin-top: 20px; }
+.error-msg { color: #ff6b6b; margin-top: 12px; min-height: 20px; }
+.hidden { display: none !important; }
+
+/* 房间 */
+#room-screen { text-align: center; }
+#room-screen h2 { margin-bottom: 16px; }
+.share-box {
+  background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px;
+  margin-bottom: 20px; word-break: break-all; font-size: 0.9rem;
+}
+.players-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 24px; }
+.player-card {
+  background: rgba(255,255,255,0.1); padding: 16px; border-radius: 12px;
+  text-align: center;
+}
+.player-card.host { border: 2px solid #ff6b35; }
+.player-card .seat { font-size: 0.8rem; color: rgba(255,255,255,0.6); }
+.player-card .name { font-size: 1.1rem; margin-top: 4px; }
+#waiting-msg { color: rgba(255,255,255,0.6); margin-bottom: 16px; }
+
+/* 游戏桌面 */
+#game-screen { padding: 10px; }
+.game-top {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 10px; padding: 8px 12px; background: rgba(0,0,0,0.2); border-radius: 8px;
+}
+#game-info { display: flex; gap: 16px; font-size: 0.85rem; }
+#turn-indicator { font-weight: bold; color: #ffd93d; }
+.game-table {
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  min-height: 200px; margin-bottom: 10px;
+}
+#opponents-area { display: flex; justify-content: space-around; width: 100%; }
+.opponent {
+  text-align: center; padding: 8px; background: rgba(0,0,0,0.15); border-radius: 8px; min-width: 80px;
+}
+.opponent .op-name { font-size: 0.8rem; margin-bottom: 4px; }
+.opponent .op-count { font-size: 0.75rem; color: rgba(255,255,255,0.6); }
+.opponent .op-melds { display: flex; flex-wrap: wrap; gap: 2px; margin-top: 4px; justify-content: center; }
+#discard-area { padding: 20px; }
+#last-played { font-size: 1.5rem; }
+
+/* 手牌 */
+#my-area { position: fixed; bottom: 0; left: 0; right: 0; background: #145a24; padding: 10px; }
+#my-melds { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; min-height: 30px; }
+#my-hand { display: flex; gap: 4px; overflow-x: auto; padding-bottom: 8px; justify-content: center; }
+.tile {
+  width: 36px; height: 48px; background: #fff; color: #333; border-radius: 4px;
+  display: flex; align-items: center; justify-content: center; font-size: 0.8rem;
+  font-weight: bold; cursor: pointer; user-select: none; flex-shrink: 0;
+  border: 2px solid #ddd; position: relative;
+}
+.tile:hover { transform: translateY(-4px); }
+.tile.selected { border-color: #ff6b35; transform: translateY(-8px); }
+.tile.laizi { border-color: #ffd93d; box-shadow: 0 0 8px #ffd93d; }
+.tile.pizi { border-color: #ff4757; box-shadow: 0 0 8px #ff4757; }
+.tile.wan { color: #c0392b; }
+.tile.tong { color: #2980b9; }
+.tile.tiao { color: #27ae60; }
+.tile.feng, .tile.jian { color: #8e44ad; }
+.meld-group { display: flex; gap: 2px; }
+.meld-group .tile { width: 28px; height: 38px; font-size: 0.65rem; }
+
+/* 操作按钮 */
+#action-buttons {
+  display: flex; gap: 8px; justify-content: center; margin-top: 8px;
+}
+#action-buttons button {
+  padding: 8px 16px; border: none; border-radius: 6px; font-size: 0.9rem;
+  cursor: pointer; font-weight: bold;
+}
+#btn-chi { background: #3498db; color: #fff; }
+#btn-peng { background: #9b59b6; color: #fff; }
+#btn-gang { background: #e67e22; color: #fff; }
+#btn-pizi-gang { background: #ff4757; color: #fff; }
+#btn-hu { background: #e74c3c; color: #fff; }
+#btn-skip { background: rgba(255,255,255,0.3); color: #fff; }
+
+/* 结算 */
+#result-screen { text-align: center; padding-top: 40px; }
+#result-content { background: rgba(255,255,255,0.1); padding: 20px; border-radius: 12px; margin: 20px 0; }
+.result-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+
+@media (max-width: 600px) {
+  .tile { width: 30px; height: 40px; font-size: 0.7rem; }
+  #home-screen h1 { font-size: 2rem; }
+}
